@@ -69,13 +69,7 @@ const UserApp: React.FC = () => {
               <DashboardIcon />
               <span>Dashboard</span>
           </a>
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-            aria-label="Toggle theme"
-          >
-            {theme === 'light' ? <MoonIcon /> : <SunIcon />}
-          </button>
+        
         </div>
       </header>
       
