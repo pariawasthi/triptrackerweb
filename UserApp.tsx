@@ -8,7 +8,7 @@ import Profile from './components/Profile';
 import { useTrips } from './hooks/useTrips';
 import { useExpenses } from './hooks/useExpenses';
 import { useBudget } from './hooks/useBudget';
-import { HistoryIcon, MapPinIcon, WalletIcon, LightbulbIcon, UserCircleIcon, DashboardIcon, MoonIcon, SunIcon } from './components/Icons';
+import { HistoryIcon, MapPinIcon, WalletIcon, LightbulbIcon, UserCircleIcon, DashboardIcon } from './components/Icons';
 import { Trip } from './types';
 import { useTheme } from './hooks/useTheme';
 import { demoTrips, demoExpenses } from './utils/demoData';
@@ -23,12 +23,14 @@ const UserApp: React.FC = () => {
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
   const { theme, toggleTheme } = useTheme();
 
+  // Always include demo trips first
   const displayTrips = useMemo(() => {
-    return userTrips.length > 0 ? userTrips : demoTrips;
+    return [...demoTrips, ...userTrips]; // demo + user trips
   }, [userTrips]);
 
+  // Always include demo expenses first
   const displayExpenses = useMemo(() => {
-    return userExpenses.length > 0 ? userExpenses : demoExpenses;
+    return [...demoExpenses, ...userExpenses]; // demo + user expenses
   }, [userExpenses]);
 
   const handleClearAllData = () => {
@@ -58,9 +60,7 @@ const UserApp: React.FC = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 font-sans flex flex-col text-gray-800 dark:text-gray-200">
       <header className="p-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm shadow-lg shadow-gray-200/10 dark:shadow-cyan-500/10 sticky top-0 z-10 flex items-center">
-        <div className="flex-1">
-            {/* Left side spacer */}
-        </div>
+        <div className="flex-1">{/* Left spacer */}</div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-wider">
           Trip<span className="text-cyan-500 dark:text-cyan-400">Tracker</span>
         </h1>
@@ -69,7 +69,6 @@ const UserApp: React.FC = () => {
               <DashboardIcon />
               <span>Dashboard</span>
           </a>
-        
         </div>
       </header>
       

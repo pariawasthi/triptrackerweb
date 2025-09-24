@@ -2,15 +2,18 @@ import React from 'react';
 import { Trip } from '../../../types';
 import { getTripsByDay } from '../../../utils/dataProcessing';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { demoTrips } from '../../../utils/demoData'; // import demo trips
 
 interface TripsByDayChartProps {
     trips: Trip[];
 }
 
 const TripsByDayChart: React.FC<TripsByDayChartProps> = ({ trips }) => {
-    const data = getTripsByDay(trips);
+    // Combine demo trips with user trips
+    const allTrips = [...demoTrips, ...trips];
+    const data = getTripsByDay(allTrips);
 
-    if (trips.length === 0) {
+    if (allTrips.length === 0) {
         return <p className="text-center text-gray-500">No trip data to display.</p>;
     }
 
